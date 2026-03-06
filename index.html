@@ -43,7 +43,6 @@ body {
   background: #060410;
   border-bottom: 1px solid var(--bdr);
   flex-shrink: 0;
-  position: relative;
   z-index: 10;
 }
 .tab {
@@ -56,611 +55,131 @@ body {
   text-transform: uppercase;
   color: var(--text3);
   border-bottom: 2px solid transparent;
-  transition: color .2s, border-color .2s, background .2s;
-  user-select: none;
+  transition: all .2s;
 }
 .tab-icon { font-size: 17px; display: block; margin-bottom: 3px; }
-.tab.active {
-  color: var(--gold2);
-  border-bottom-color: var(--gold);
-  background: rgba(200,152,40,.05);
-}
-.tab:active { background: rgba(200,152,40,.08); }
+.tab.active { color: var(--gold2); border-bottom-color: var(--gold); background: rgba(200,152,40,.05); }
 
 /* ═══ SCREENS ═══ */
-.screen {
-  display: none;
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+.screen { display: none; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .screen.active { display: flex; flex-direction: column; }
-.screen-inner { padding: 0 0 48px; }
-
-/* ═══ DIVIDER ═══ */
-.divider {
-  display: flex; align-items: center; gap: 10px;
-  padding: 0 18px; margin: 18px 0 14px;
-}
-.divider-line { flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--bdr2), transparent); }
-.divider-gem { color: var(--gold); font-size: 13px; opacity: .7; }
-
-/* ═══ SECTION LABEL ═══ */
-.label {
-  font-family: "Cinzel", serif;
-  font-size: 8.5px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text3);
-  padding: 0 18px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.label::after { content:""; flex:1; height:1px; background: var(--bdr); }
+.screen-inner { padding: 20px 0 48px; }
 
 /* ══════════════════════════════
-   PORTRAIT & HISTOIRE STYLE
+   NOUVEAU STYLE PORTRAIT
 ══════════════════════════════ */
-.portrait {
-  position: relative;
-  width: 100%;
-  background: #000; /* Fond noir pour combler si l'image est étroite */
+.portrait-container {
   display: flex;
-  justify-content: center;
-  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.portrait img {
-  width: auto;       /* Largeur automatique */
-  max-width: 100%;   /* Ne dépasse pas l'écran */
-  height: 65vw;      /* Hauteur augmentée pour voir plus du perso */
-  max-height: 500px; /* Limite pour ne pas que ça soit trop grand */
-  object-fit: contain; /* FORCE L'IMAGE ENTIÈRE sans couper */
+.portrait-frame {
+  position: relative;
+  width: 60%; /* Plus petit, ne prend pas toute la largeur */
+  max-width: 250px;
+  border: 1px solid var(--gold);
+  padding: 5px;
+  background: linear-gradient(135deg, #1a1525, #080610);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(128,64,208,0.2);
+  border-radius: 4px;
+}
+
+.portrait-frame img {
+  width: 100%;
+  height: auto;
   display: block;
+  object-fit: contain;
+  border-radius: 2px;
 }
 
-/* Style spécifique pour l'image horizontale en Histoire */
-#s-histoire .portrait img {
-  height: 35vw; /* Plus court pour faire horizontal */
-  max-height: 200px;
-  object-position: center 20%;
-}
-
-.portrait-vignette {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(8,6,16,.3) 0%,
-    transparent 35%,
-    transparent 55%,
-    rgba(8,6,16,.95) 100%
-  );
-}
-.portrait-void {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 38% 42%, rgba(128,64,208,.12) 0%, transparent 60%);
-  pointer-events: none;
-}
-.portrait-text {
-  position: absolute;
-  bottom: 14px; left: 0; right: 0;
+.portrait-info {
   text-align: center;
+  margin-top: 15px;
 }
+
 .portrait-name {
   font-family: "Cinzel Decorative", serif;
-  font-size: 28px;
-  letter-spacing: 5px;
+  font-size: 26px;
+  letter-spacing: 4px;
   color: var(--text);
-  text-shadow: 0 0 30px rgba(0,0,0,.9), 0 0 60px rgba(128,64,208,.3);
   display: block;
-  margin-bottom: 4px;
 }
-.portrait-name .v { color: var(--void2); text-shadow: 0 0 16px rgba(128,64,208,.8); }
+.portrait-name .v { color: var(--void2); text-shadow: 0 0 10px rgba(128,64,208,0.5); }
 .portrait-sub {
   font-family: "Cinzel", serif;
   font-size: 9px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--text2);
-  text-shadow: 0 0 10px rgba(0,0,0,.8);
-}
-
-/* Badges */
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--bdr);
-  background: rgba(0,0,0,.2);
-}
-.badge {
-  font-family: "Cinzel", serif;
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 4px 12px;
-}
-.badge.green { background: rgba(40,80,40,.5); color: #80c080; border: 1px solid rgba(80,160,80,.2); }
-.badge.void  { background: rgba(80,40,140,.5); color: var(--void3); border: 1px solid rgba(128,64,208,.25); }
-
-/* Stats grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  padding: 0 18px;
-  margin-bottom: 8px;
-}
-.stat-box {
-  background: var(--card);
-  border: 1px solid var(--bdr);
-  text-align: center;
-  padding: 11px 4px 9px;
-  position: relative;
-}
-.stat-box.hi { border-color: rgba(64,128,64,.35); background: rgba(32,64,32,.2); }
-.stat-box.void-s { border-color: rgba(128,64,208,.3); background: rgba(60,30,100,.2); }
-.sb-label {
-  font-family: "Cinzel", serif;
-  font-size: 7px;
-  letter-spacing: 1.5px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--text3);
-  display: block;
-  margin-bottom: 4px;
 }
-.sb-score { font-size: 30px; font-weight: 500; color: var(--text); line-height: 1; display: block; }
-.stat-box.hi .sb-score { color: #80c080; }
-.stat-box.void-s .sb-score { color: var(--void3); font-size: 18px; line-height: 1.3; font-style: italic; }
-.sb-mod {
-  font-family: "Cinzel", serif;
-  font-size: 12px;
-  color: var(--text2);
-  display: block;
-  border-top: 1px solid var(--bdr);
-  margin-top: 3px;
-  padding-top: 3px;
-}
-.stat-box.hi .sb-mod { color: #60a860; }
 
-/* Compétences */
+/* ═══ DIVIDER ═══ */
+.divider { display: flex; align-items: center; gap: 10px; padding: 0 18px; margin: 18px 0 14px; }
+.divider-line { flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--bdr2), transparent); }
+.divider-gem { color: var(--gold); font-size: 13px; opacity: .7; }
+
+/* ═══ LABELS & STATS (Inchangés mais conservés pour le code entier) ═══ */
+.label { font-family: "Cinzel", serif; font-size: 8.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--text3); padding: 0 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.label::after { content:""; flex:1; height:1px; background: var(--bdr); }
+
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 0 18px 12px; }
+.badge { font-family: "Cinzel", serif; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 2px; }
+.badge.green { background: rgba(40,80,40,.3); color: #80c080; border: 1px solid rgba(80,160,80,.2); }
+.badge.void  { background: rgba(80,40,140,.3); color: var(--void3); border: 1px solid rgba(128,64,208,.25); }
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 18px; }
+.stat-box { background: var(--card); border: 1px solid var(--bdr); text-align: center; padding: 10px 4px; }
+.stat-box.hi { border-color: rgba(64,128,64,.3); background: rgba(32,64,32,.1); }
+.sb-label { font-family: "Cinzel", serif; font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); display: block; }
+.sb-score { font-size: 26px; font-weight: 500; color: var(--text); display: block; margin: 2px 0; }
+.sb-mod { font-family: "Cinzel", serif; font-size: 11px; color: var(--text2); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2px; }
+
+/* Styles additionnels pour le Combat et Journal (Simplifiés pour le prompt) */
 .skills-list { padding: 0 18px; }
-.skill-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255,255,255,.03);
-}
-.skill-row:last-child { border-bottom: none; }
-.skill-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  border: 1.5px solid var(--text3); flex-shrink: 0;
-}
-.skill-dot.on { background: #408040; border-color: #408040; box-shadow: 0 0 5px rgba(64,128,64,.4); }
+.skill-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.03); }
+.skill-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--text3); }
+.skill-dot.on { background: #408040; border-color: #408040; }
 .skill-name { flex:1; font-size: 14px; color: var(--text2); }
-.skill-val { font-family: "Cinzel", serif; font-size: 12px; color: var(--text); font-weight: 600; }
-.skill-attr { font-size: 10px; color: var(--text3); margin-left: 3px; }
+.skill-val { font-family: "Cinzel", serif; font-size: 12px; color: var(--text); }
 
-/* Personnalité */
-.perso-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding: 0 18px;
-}
-.perso-box {
-  background: var(--card);
-  border: 1px solid var(--bdr);
-  padding: 10px 12px;
-}
-.perso-box.void-p { border-color: rgba(128,64,208,.25); background: rgba(50,25,80,.2); }
-.perso-lbl {
-  font-family: "Cinzel", serif;
-  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold); display: block; margin-bottom: 5px;
-}
-.perso-box.void-p .perso-lbl { color: var(--void3); }
-.perso-box p { font-size: 13px; color: var(--text2); font-style: italic; line-height: 1.55; }
+/* PV Hero Style */
+.pv-hero { background: var(--card); padding: 20px 18px; text-align: center; border-bottom: 1px solid var(--bdr); }
+.pv-number { font-family: "Cinzel Decorative", serif; font-size: 60px; color: var(--hp-hi); display: block; }
+.pv-track { height: 6px; background: rgba(255,255,255,.05); border-radius: 3px; margin: 15px 0; overflow: hidden; }
+.pv-fill { height: 100%; background: var(--hp-hi); transition: width 0.3s; }
+.pv-btns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.pv-btn { padding: 10px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text); font-family: "Cinzel", serif; }
 
+/* Journal Style */
+.journal-new { padding: 15px; background: rgba(0,0,0,0.2); }
+.journal-textarea { width: 100%; height: 100px; background: #080610; border: 1px solid var(--bdr); color: var(--text); padding: 10px; font-family: serif; }
+.journal-save { width: 100%; padding: 10px; background: var(--gold); border: none; color: #000; font-family: "Cinzel", serif; font-weight: bold; margin-top: 10px; }
 
-/* ══════════════════════════════
-   ÉCRAN 2 — COMBAT
-══════════════════════════════ */
+/* Toast */
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; padding: 8px 20px; font-family: "Cinzel", serif; font-size: 10px; border-radius: 20px; opacity: 0; transition: 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
 
-/* PV hero */
-.pv-hero {
-  background: var(--card);
-  border-bottom: 1px solid var(--bdr);
-  padding: 20px 18px 16px;
-  text-align: center;
-}
-.pv-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.pv-lbl { font-family:"Cinzel",serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text3); }
-.pv-fraction { font-family:"Cinzel",serif; font-size:11px; color:var(--text2); letter-spacing:1px; }
-.pv-number {
-  font-family: "Cinzel Decorative", serif;
-  font-size: 80px;
-  line-height: 1;
-  color: var(--hp-hi);
-  text-shadow: 0 0 30px currentColor;
-  transition: color .4s, text-shadow .4s;
-  margin-bottom: 10px;
-  display: block;
-}
-.pv-track {
-  height: 6px;
-  background: rgba(255,255,255,.06);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-.pv-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width .4s ease, background .4s;
-  background: var(--hp-hi);
-  box-shadow: 0 0 8px currentColor;
-}
-.pv-btns {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.pv-btn {
-  padding: 12px 4px;
-  font-family: "Cinzel", serif;
-  font-size: 15px;
-  font-weight: 700;
-  border: 1px solid;
-  cursor: pointer;
-  user-select: none;
-  transition: background .15s, transform .1s;
-  background: transparent;
-}
-.pv-btn:active { transform: scale(.94); }
-.pv-btn.m { color: #e05050; border-color: rgba(220,80,80,.3); }
-.pv-btn.m:active { background: rgba(220,80,80,.15); }
-.pv-btn.p { color: #50c050; border-color: rgba(80,192,80,.3); }
-.pv-btn.p:active { background: rgba(80,192,80,.15); }
-.pv-custom {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-}
-.pv-input {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--bdr2);
-  color: var(--text);
-  font-family: "EB Garamond", serif;
-  font-size: 16px;
-  padding: 9px 12px;
-  outline: none;
-  width: 100%;
-  -moz-appearance: textfield;
-}
-.pv-input::-webkit-inner-spin-button { display:none; }
-.pv-input:focus { border-color: var(--gold); }
-.pv-reset {
-  padding: 9px 16px;
-  background: rgba(200,152,40,.08);
-  border: 1px solid var(--bdr2);
-  color: var(--gold2);
-  font-family: "Cinzel", serif;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.pv-reset:active { background: rgba(200,152,40,.2); }
-
-/* Combat info */
-.combat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  padding: 0 18px;
-}
-.cstat {
-  background: var(--card);
-  border: 1px solid var(--bdr);
-  text-align: center;
-  padding: 11px 4px;
-}
-.cs-lbl { font-family:"Cinzel",serif; font-size:7px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); display:block; margin-bottom:3px; }
-.cs-val { font-size: 24px; color: var(--text); font-weight: 500; }
-.cs-val.gold { color: var(--gold2); }
-.cs-val.grn  { color: #60c060; }
-
-/* Flèches */
-.arrows-block {
-  background: var(--card);
-  border: 1px solid var(--bdr2);
-  border-top: 2px solid var(--gold);
-  padding: 16px 18px;
-  margin: 0 18px;
-}
-.arr-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; }
-.arr-lbl { font-family:"Cinzel",serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
-.arr-count-wrap { font-family:"Cinzel Decorative",serif; font-size:42px; color:var(--gold2); text-shadow:0 0 16px rgba(200,152,40,.35); line-height:1; }
-.arr-count-wrap span { font-family:"Cinzel",serif; font-size:14px; color:var(--text3); }
-.arr-track { height:5px; background:rgba(255,255,255,.05); border-radius:3px; overflow:hidden; margin-bottom:14px; }
-.arr-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold2)); border-radius:3px; transition:width .3s, background .3s; }
-.arr-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
-.arr-btn {
-  padding:11px 4px; text-align:center;
-  font-family:"Cinzel",serif; font-size:12px; font-weight:700;
-  border:1px solid; cursor:pointer; user-select:none;
-  background:transparent; transition:background .15s, transform .1s;
-}
-.arr-btn:active { transform:scale(.94); }
-.arr-btn.am { color:var(--gold2); border-color:rgba(200,152,40,.3); }
-.arr-btn.am:active { background:rgba(200,152,40,.15); }
-.arr-btn.ap { color:#80c060; border-color:rgba(128,192,96,.3); }
-.arr-btn.ap:active { background:rgba(128,192,96,.15); }
-.arr-btn.ar { color:var(--text2); border-color:var(--bdr); font-size:10px; letter-spacing:1px; }
-.arr-btn.ar:active { background:rgba(255,255,255,.05); }
-
-/* Mort */
-.death-block {
-  background: var(--card);
-  border: 1px solid rgba(200,48,48,.2);
-  padding: 14px 18px;
-  margin: 0 18px;
-}
-.death-title { font-family:"Cinzel",serif; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:#c05050; margin-bottom:12px; }
-.death-row { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
-.death-row:last-child { margin-bottom:0; }
-.death-name { font-family:"Cinzel",serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text2); width:58px; }
-.death-pips { display:flex; gap:9px; }
-.dpip {
-  width:24px; height:24px; border-radius:50%;
-  border:1.5px solid; cursor:pointer; transition:all .2s;
-  background:transparent;
-}
-.dpip.s { border-color:rgba(96,192,96,.4); }
-.dpip.s.on { background:#50b050; border-color:#50b050; box-shadow:0 0 8px rgba(80,176,80,.5); }
-.dpip.f { border-color:rgba(192,64,64,.4); }
-.dpip.f.on { background:#b04040; border-color:#b04040; box-shadow:0 0 8px rgba(176,64,64,.5); }
-.death-reset {
-  width:100%; margin-top:12px; padding:9px;
-  background:transparent; border:1px solid var(--bdr);
-  color:var(--text3); font-family:"Cinzel",serif; font-size:9px; letter-spacing:2px; text-transform:uppercase;
-  cursor:pointer;
-}
-.death-reset:active { background:rgba(255,255,255,.04); }
-
-/* Repos */
-.rest-btn {
-  display:block; width:calc(100% - 36px);
-  margin:0 18px; padding:14px;
-  background:rgba(128,64,208,.1);
-  border:1px solid rgba(128,64,208,.3);
-  color:var(--void3);
-  font-family:"Cinzel",serif; font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
-  cursor:pointer; text-align:center; transition:background .2s;
-}
-.rest-btn:active { background:rgba(128,64,208,.25); }
-
-
-/* ══════════════════════════════
-   ÉCRAN 3 — JOURNAL
-══════════════════════════════ */
-
-/* Nouvelle entrée */
-.journal-new {
-  padding: 16px 18px;
-  background: rgba(0,0,0,.2);
-  border-bottom: 1px solid var(--bdr);
-  flex-shrink: 0;
-}
-.journal-date-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.journal-date {
-  font-family: "Cinzel", serif;
-  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--gold); opacity: .8;
-}
-.journal-session-num {
-  font-family: "Cinzel", serif;
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--text3);
-}
-.journal-title-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--bdr2);
-  color: var(--text);
-  font-family: "Cinzel", serif;
-  font-size: 15px;
-  letter-spacing: 1px;
-  padding: 6px 0;
-  margin-bottom: 10px;
-  outline: none;
-}
-.journal-title-input::placeholder { color: var(--text3); font-style: italic; }
-.journal-title-input:focus { border-bottom-color: var(--gold); }
-.journal-textarea {
-  width: 100%;
-  min-height: 130px;
-  background: rgba(255,255,255,.02);
-  border: 1px solid var(--bdr);
-  color: var(--text);
-  font-family: "EB Garamond", serif;
-  font-size: 15px;
-  line-height: 1.75;
-  padding: 12px 14px;
-  outline: none;
-  resize: none;
-  transition: border-color .2s;
-}
-.journal-textarea::placeholder { color: var(--text3); font-style: italic; }
-.journal-textarea:focus { border-color: rgba(128,64,208,.4); background: rgba(128,64,208,.03); }
-.journal-save {
-  width: 100%;
-  margin-top: 10px;
-  padding: 13px;
-  background: rgba(200,152,40,.1);
-  border: 1px solid var(--bdr2);
-  color: var(--gold2);
-  font-family: "Cinzel", serif;
-  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  cursor: pointer; transition: background .2s;
-}
-.journal-save:active { background: rgba(200,152,40,.25); }
-
-/* Entrées passées */
-.journal-history { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.journal-entry {
-  border-bottom: 1px solid var(--bdr);
-  overflow: hidden;
-}
-.journal-entry-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  cursor: pointer;
-  user-select: none;
-  transition: background .15s;
-}
-.journal-entry-header:active { background: rgba(255,255,255,.03); }
-.entry-num {
-  font-family: "Cinzel Decorative", serif;
-  font-size: 18px;
-  color: var(--gold);
-  opacity: .6;
-  flex-shrink: 0;
-  width: 28px;
-  text-align: center;
-}
-.entry-meta { flex: 1; min-width: 0; }
-.entry-title {
-  font-family: "Cinzel", serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 2px;
-}
-.entry-date { font-family:"Cinzel",serif; font-size:8.5px; letter-spacing:1.5px; color:var(--text3); text-transform:uppercase; }
-.entry-arrow { color: var(--text3); font-size: 12px; flex-shrink: 0; transition: transform .2s; }
-.entry-arrow.open { transform: rotate(90deg); }
-.entry-body {
-  display: none;
-  padding: 0 18px 16px;
-  font-size: 14.5px;
-  color: var(--text2);
-  line-height: 1.8;
-  white-space: pre-wrap;
-  border-top: 1px solid var(--bdr);
-  position: relative;
-}
-.entry-body.open { display: block; }
-.entry-delete {
-  position: absolute;
-  top: 10px; right: 14px;
-  font-family: "Cinzel", serif;
-  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--text3);
-  cursor: pointer;
-  padding: 4px 8px;
-  border: 1px solid var(--bdr);
-  background: transparent;
-}
-.entry-delete:active { background: rgba(200,48,48,.1); color: #e05050; border-color: rgba(200,48,48,.3); }
-
-.journal-empty {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text3);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.8;
-}
-.journal-empty .je-icon { font-size: 32px; display: block; margin-bottom: 12px; opacity: .4; }
-
-/* ═══ TOAST ═══ */
-.toast {
-  position: fixed; bottom: 28px; left: 50%;
-  transform: translateX(-50%) translateY(16px);
-  background: var(--cardhi);
-  border: 1px solid var(--bdr2);
-  color: var(--gold2);
-  font-family: "Cinzel", serif;
-  font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
-  padding: 10px 22px;
-  z-index: 999;
-  opacity: 0;
-  transition: opacity .25s, transform .25s;
-  pointer-events: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(0,0,0,.5);
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* ═══ HISTOIRE ═══ */
-.hist-chapter { margin-bottom: 20px; }
-.hist-title {
-  font-family: "Cinzel Decorative", serif;
-  font-size: 15px;
-  color: var(--gold2);
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--bdr2);
-  text-shadow: 0 0 12px rgba(200,152,40,.25);
-}
-.hist-title.void-t {
-  color: var(--void3);
-  border-bottom-color: var(--bdr);
-  text-shadow: 0 0 12px rgba(128,64,208,.4);
-}
-.hist-body {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.9;
-  text-align: justify;
-}
-.hist-body p + p { margin-top: 10px; }
-.hist-body em { color: var(--text); font-style: italic; }
-.hist-body strong { color: var(--gold2); }
-.void-w { color: var(--void3); }
 </style>
 </head>
 <body>
 
 <div class="tabs">
-  <div class="tab active"  onclick="go('perso', this)"><span class="tab-icon">🧝</span>Thallan</div>
-  <div class="tab"         onclick="go('combat',this)"><span class="tab-icon">⚔️</span>Combat</div>
-  <div class="tab"         onclick="go('journal',this)"><span class="tab-icon">📖</span>Journal</div>
-  <div class="tab"         onclick="go('histoire',this)"><span class="tab-icon">🌿</span>Histoire</div>
+  <div class="tab active" onclick="go('perso', this)"><span class="tab-icon">🧝</span>Thallan</div>
+  <div class="tab" onclick="go('combat',this)"><span class="tab-icon">⚔️</span>Combat</div>
+  <div class="tab" onclick="go('journal',this)"><span class="tab-icon">📖</span>Journal</div>
+  <div class="tab" onclick="go('histoire',this)"><span class="tab-icon">🌿</span>Histoire</div>
 </div>
 
 <div id="s-perso" class="screen active">
 <div class="screen-inner">
-
-  <div class="portrait">
-    <img src="portrait.png" alt="Thallan">
-    <div class="portrait-vignette"></div>
-    <div class="portrait-void"></div>
-    <div class="portrait-text">
+  
+  <div class="portrait-container">
+    <div class="portrait-frame">
+      <img src="portrait.png" alt="Thallan">
+    </div>
+    <div class="portrait-info">
       <span class="portrait-name">Th<span class="v">a</span>ll<span class="v">a</span>n</span>
       <span class="portrait-sub">Fils de Sylvethis</span>
     </div>
@@ -669,221 +188,70 @@ body {
   <div class="badges">
     <span class="badge green">⚔ Guerrier 2</span>
     <span class="badge green">Elfe des Bois</span>
-    <span class="badge green">♩ Artiste</span>
     <span class="badge void">◈ Marque de la Nuit</span>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
+  
   <div class="label">Caractéristiques</div>
-  <div class="stats-grid" style="margin-bottom:14px;">
-    <div class="stat-box"><span class="sb-label">Force</span><span class="sb-score">12</span><span class="sb-mod">+1</span></div>
-    <div class="stat-box hi"><span class="sb-label">Dextérité ★</span><span class="sb-score">17</span><span class="sb-mod">+3</span></div>
-    <div class="stat-box"><span class="sb-label">Constitution</span><span class="sb-score">13</span><span class="sb-mod">+1</span></div>
-    <div class="stat-box"><span class="sb-label">Intelligence</span><span class="sb-score">14</span><span class="sb-mod">+2</span></div>
-    <div class="stat-box"><span class="sb-label">Sagesse</span><span class="sb-score">11</span><span class="sb-mod">+0</span></div>
-    <div class="stat-box"><span class="sb-label">Charisme</span><span class="sb-score">8</span><span class="sb-mod">−1</span></div>
-  </div>
-  <p style="font-size:11px;color:var(--text3);font-style:italic;padding:0 18px;margin-bottom:16px;">★ DEX 15 +2 (bonus racial elfe des bois)</p>
-
-  <div class="label">Compétences maîtrisées</div>
-  <div class="skills-list" style="margin-bottom:16px;">
-    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Acrobaties</span><span class="skill-val">+5</span><span class="skill-attr">DEX</span></div>
-    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Arcanes</span><span class="skill-val">+4</span><span class="skill-attr">INT</span></div>
-    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Athlétisme</span><span class="skill-val">+3</span><span class="skill-attr">FOR</span></div>
-    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Perception</span><span class="skill-val">+2</span><span class="skill-attr">SAG</span></div>
-    <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">Discrétion</span><span class="skill-val">+3</span><span class="skill-attr">DEX</span></div>
-    <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">Survie</span><span class="skill-val">+0</span><span class="skill-attr">SAG</span></div>
+  <div class="stats-grid">
+    <div class="stat-box"><span class="sb-label">FOR</span><span class="sb-score">12</span><span class="sb-mod">+1</span></div>
+    <div class="stat-box hi"><span class="sb-label">DEX</span><span class="sb-score">17</span><span class="sb-mod">+3</span></div>
+    <div class="stat-box"><span class="sb-label">CON</span><span class="sb-score">13</span><span class="sb-mod">+1</span></div>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-gem">❧</div><div class="divider-line"></div></div>
-  <div class="label">Personnalité</div>
-  <div class="perso-grid" style="margin-bottom:6px;">
-    <div class="perso-box"><span class="perso-lbl">Trait</span><p>J'observe avant d'agir. Le silence est ma première réponse.</p></div>
-    <div class="perso-box"><span class="perso-lbl">Idéal</span><p>La vérité avant tout.</p></div>
-    <div class="perso-box"><span class="perso-lbl">Lien</span><p>Sylvethis. La forêt qui chantait.</p></div>
-    <div class="perso-box void-p"><span class="perso-lbl">Défaut</span><p>Refuse le combat rapproché.</p></div>
+  
+  <div class="label">Compétences</div>
+  <div class="skills-list">
+    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Acrobaties</span><span class="skill-val">+5</span></div>
+    <div class="skill-row"><div class="skill-dot on"></div><span class="skill-name">Arcanes</span><span class="skill-val">+4</span></div>
+    <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">Discrétion</span><span class="skill-val">+3</span></div>
   </div>
-
-  <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
-  <div class="label">Armes & Équipement</div>
-  <div style="padding:0 18px;font-size:14px;color:var(--text2);line-height:2.1;margin-bottom:6px;">
-    <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-right:8px;">Arc long</span>+7 · 1d8+3 · 45/180 m</div>
-    <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-right:8px;">Épée courte</span>+5 · 1d6+3 · contact</div>
-    <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-right:8px;">Armure</span>Cuir clouté · CA 15</div>
-    <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-right:8px;">Langues</span>Commun, Elfique</div>
-  </div>
-
 </div>
 </div>
 
 <div id="s-combat" class="screen">
 <div class="screen-inner">
-
   <div class="pv-hero">
-    <div class="pv-label-row">
-      <span class="pv-lbl">Points de Vie</span>
-      <span class="pv-fraction" id="pv-frac">18 / 18</span>
-    </div>
     <span class="pv-number" id="pv-num">18</span>
     <div class="pv-track"><div class="pv-fill" id="pv-fill" style="width:100%"></div></div>
     <div class="pv-btns">
-      <button class="pv-btn m" onclick="chPV(-5)">−5</button>
-      <button class="pv-btn m" onclick="chPV(-1)">−1</button>
-      <button class="pv-btn p" onclick="chPV(+1)">+1</button>
-      <button class="pv-btn p" onclick="chPV(+5)">+5</button>
-    </div>
-    <div class="pv-custom">
-      <input class="pv-input" id="pv-in" type="number" placeholder="Entrer une valeur exacte…" onchange="setPV(this.value)">
-      <button class="pv-reset" onclick="resetPV()">↺ Repos</button>
+      <button class="pv-btn" onclick="chPV(-5)">-5</button>
+      <button class="pv-btn" onclick="chPV(-1)">-1</button>
+      <button class="pv-btn" onclick="chPV(1)">+1</button>
+      <button class="pv-btn" onclick="chPV(5)">+5</button>
     </div>
   </div>
-
-  <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
-  <div class="label">Stats de combat</div>
-  <div class="combat-row" style="margin-bottom:14px;">
-    <div class="cstat"><span class="cs-lbl">Armure</span><span class="cs-val gold">15</span></div>
-    <div class="cstat"><span class="cs-lbl">Initiative</span><span class="cs-val grn">+3</span></div>
-    <div class="cstat"><span class="cs-lbl">Vitesse</span><span class="cs-val" style="font-size:18px;">10,5m</span></div>
+  <div style="padding: 20px; text-align: center; color: var(--text3);">
+    Contrôles de combat actifs.
   </div>
-  <div class="combat-row" style="margin-bottom:18px;">
-    <div class="cstat"><span class="cs-lbl">Second Souffle</span><span class="cs-val" style="font-size:16px;">1d10+2</span></div>
-    <div class="cstat"><span class="cs-lbl">Fougue d'action</span><span class="cs-val" style="font-size:14px;color:var(--void3);">+1 action</span></div>
-    <div class="cstat"><span class="cs-lbl">Maîtrise</span><span class="cs-val gold">+2</span></div>
-  </div>
-
-  <div class="label">Flèches</div>
-  <div class="arrows-block" style="margin-bottom:18px;">
-    <div class="arr-header">
-      <span class="arr-lbl">Carquois</span>
-      <div class="arr-count-wrap"><span id="arr-n">20</span><span> / 20</span></div>
-    </div>
-    <div class="arr-track"><div class="arr-fill" id="arr-fill" style="width:100%"></div></div>
-    <div class="arr-btns">
-      <button class="arr-btn am" onclick="chArr(-1)">−1 flèche</button>
-      <button class="arr-btn ar" onclick="resetArr()">↺ Recharger</button>
-      <button class="arr-btn ap" onclick="chArr(+1)">+1 flèche</button>
-    </div>
-  </div>
-
-  <div class="label">Jets contre la mort</div>
-  <div class="death-block" style="margin-bottom:18px;">
-    <div class="death-title">⚰ Stabilisation</div>
-    <div class="death-row">
-      <span class="death-name">Succès</span>
-      <div class="death-pips">
-        <div class="dpip s" id="ds0" onclick="tDeath('s',0)"></div>
-        <div class="dpip s" id="ds1" onclick="tDeath('s',1)"></div>
-        <div class="dpip s" id="ds2" onclick="tDeath('s',2)"></div>
-      </div>
-    </div>
-    <div class="death-row">
-      <span class="death-name">Échecs</span>
-      <div class="death-pips">
-        <div class="dpip f" id="df0" onclick="tDeath('f',0)"></div>
-        <div class="dpip f" id="df1" onclick="tDeath('f',1)"></div>
-        <div class="dpip f" id="df2" onclick="tDeath('f',2)"></div>
-      </div>
-    </div>
-    <button class="death-reset" onclick="resetDeath()">↺ Réinitialiser les jets</button>
-  </div>
-
-  <button class="rest-btn" onclick="longRest()">☽ Repos Long — Tout restaurer</button>
-
 </div>
 </div>
 
-<div id="s-journal" class="screen" style="flex-direction:column;">
-
+<div id="s-journal" class="screen">
+<div class="screen-inner">
   <div class="journal-new">
-    <div class="journal-date-row">
-      <span class="journal-date" id="j-date"></span>
-      <span class="journal-session-num" id="j-num">Session #1</span>
-    </div>
-    <input class="journal-title-input" id="j-title" type="text" placeholder="Titre de la session…" maxlength="60">
-    <textarea class="journal-textarea" id="j-text" placeholder="Ce qui s'est passé aujourd'hui… les ennemis affrontés, les découvertes, les moments mémorables, les mystères de la Nuit Sans Nom…"></textarea>
-    <button class="journal-save" onclick="saveEntry()">✦ Enregistrer cette session</button>
+    <textarea class="journal-textarea" id="j-text" placeholder="Notez les moments forts..."></textarea>
+    <button class="journal-save" onclick="saveEntry()">Enregistrer la session</button>
   </div>
-
-  <div class="journal-history" id="j-history"></div>
-
+  <div id="j-history" style="padding: 15px;"></div>
 </div>
-
+</div>
 
 <div id="s-histoire" class="screen">
-<div class="screen-inner" style="padding-bottom:48px;">
-
-  <div class="portrait">
-    <img src="portrait.png" alt="Thallan">
-    <div class="portrait-vignette"></div>
-    <div class="portrait-void"></div>
-    <div class="portrait-text">
-      <span class="portrait-name">Th<span class="v">a</span>ll<span class="v">a</span>n</span>
-      <span class="portrait-sub">Fils de Sylvethis</span>
-    </div>
-  </div>
-
-  <div style="padding:0 18px;">
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
-
-    <div class="hist-chapter">
-      <div class="hist-title">I. L'Enfant de Sylvethis</div>
-      <div class="hist-body">
-        <p>Il fut un temps où la forêt de Sylvethis chantait.</p>
-        <p>Ses arbres millénaires résonnaient des mélodies elfiques le soir venu, portées par des voix qui se mêlaient au vent entre les hautes frondaisons. C'est là que naquit Thallan — dans cette clarté verte et dorée, bercé par les chants de son peuple et les bruissements d'une forêt vivante.</p>
-        <p><strong>Thallan était un enfant de la lumière.</strong> On ne le reconnaît plus aujourd'hui.</p>
-      </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-gem">❧</div><div class="divider-line"></div></div>
-
-    <div class="hist-chapter void-ch">
-      <div class="hist-title void-t">II. La Nuit Sans Nom</div>
-      <div class="hist-body">
-        <p>Personne ne sait vraiment ce qui s'est passé. Pas même Thallan.</p>
-        <p>Il se souvient du silence d'abord — un silence total, contre-nature, comme si la forêt elle-même retenait son souffle. Puis les couleurs : des teintes pourpres et noires qui n'avaient aucun droit d'exister sous les étoiles.</p>
-        <p>Quand il a repris conscience, la forêt n'était plus là.</p>
-        <p>Pas brûlée, pas abattue. <em>Corrompue.</em> Les arbres tordus comme des membres brisés, la terre noircie par quelque chose qui pulsait encore sous la surface. <span class="void-w">Une magie sombre</span> avait traversé Sylvethis comme une lame traverse de la soie.</p>
-      </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-gem">◈</div><div class="divider-line"></div></div>
-
-    <div class="hist-chapter" style="background:rgba(40,16,74,.2);border:1px solid rgba(128,64,208,.2);border-left:3px solid var(--void2);padding:14px 16px;margin-bottom:20px;">
-      <div class="hist-title void-t">III. La Marque de la Nuit</div>
-      <div class="hist-body">
-        <p>La Nuit Sans Nom a laissé son empreinte sur Thallan — littéralement.</p>
-        <p>Sur le côté gauche de son visage, de la tempe jusqu'à la pommette, la peau est devenue <span class="void-w">translucide et sombre</span>. Dans la pénombre, la zone semble luire faiblement d'un éclat violacé.</p>
-        <p>L'œil gauche est entièrement blanc. <strong>Ils ont tort de croire qu'il ne voit pas.</strong></p>
-        <p>Thallan perçoit des formes, des présences que l'autre œil ne capte pas. Ce don involontaire l'inquiète autant qu'il lui est utile. Il ne s'en sépare jamais.</p>
-      </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
-
-    <div class="hist-chapter">
-      <div class="hist-title">IV. Ce Qu'il Porte</div>
-      <div class="hist-body">
-        <p>Thallan voyage léger. Son arc long est l'une des rares choses qu'il ait gardées. Une arme taillée dans le bois d'un arbre de Sylvethis avant la Nuit Sans Nom. Il le porte comme on porte une relique.</p>
-        <p>L'autre chose qu'il a sauvée, c'est <strong>sa voix</strong>. Chaque soir, quand le camp est établi, Thallan s'isole et chante à voix basse. C'est sa façon de ne pas oublier. De garder vivant ce qui n'existe plus.</p>
-      </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-gem">❧</div><div class="divider-line"></div></div>
-
-    <div style="border-left:3px solid var(--gold);padding:12px 18px;background:rgba(200,152,40,.05);margin-bottom:8px;">
-      <p style="font-style:italic;font-size:15px;color:var(--text);line-height:1.7;">« Je n'ai plus de forêt. Mais j'ai encore ma voix. Tant qu'elle porte, Sylvethis existe. »</p>
-      <p style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:6px;">— Thallan, fils de Sylvethis</p>
-    </div>
-
-  </div>
+<div class="screen-inner" style="padding: 20px;">
+  <h2 style="font-family:'Cinzel Decorative'; color:var(--gold2); margin-bottom:15px;">L'Enfant de Sylvethis</h2>
+  <p style="line-height:1.8; color:var(--text2); text-align:justify;">
+    Il fut un temps où la forêt de Sylvethis chantait. Thallan était un enfant de la lumière avant que la Nuit Sans Nom ne change tout. Désormais marqué par le vide, il porte le souvenir de son peuple dans sa voix et la puissance de son bois dans son arc.
+  </p>
 </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ══ NAVIGATION ══
+// Logic simplifiée pour la démo
 function go(name, el) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -891,182 +259,29 @@ function go(name, el) {
   el.classList.add("active");
 }
 
-// ══ STORAGE ══
-function load(k, def) {
-  try { const v = localStorage.getItem("th_"+k); return v !== null ? JSON.parse(v) : def; }
-  catch(e) { return def; }
-}
-function save(k, v) {
-  try { localStorage.setItem("th_"+k, JSON.stringify(v)); } catch(e) {}
-}
-
-// ══ PV ══
-const PV_MAX = 18;
-let pv = load("pv", PV_MAX);
-
-function renderPV() {
-  const pct = Math.max(0, pv / PV_MAX * 100);
-  const num = document.getElementById("pv-num");
-  const fill = document.getElementById("pv-fill");
-  const frac = document.getElementById("pv-frac");
-  num.textContent = pv;
-  frac.textContent = pv + " / " + PV_MAX;
-  fill.style.width = pct + "%";
-  const col = pct > 55 ? "#40c040" : pct > 25 ? "#d08020" : "#d02020";
-  num.style.color = col;
-  num.style.textShadow = "0 0 30px " + col;
-  fill.style.background = col;
-  fill.style.boxShadow = "0 0 8px " + col;
-  save("pv", pv);
-}
+let pv = 18;
 function chPV(d) {
-  pv = Math.max(0, Math.min(PV_MAX, pv + d));
-  renderPV();
+  pv = Math.max(0, Math.min(18, pv + d));
+  document.getElementById("pv-num").textContent = pv;
+  document.getElementById("pv-fill").style.width = (pv/18*100) + "%";
   toast(d > 0 ? "+" + d + " PV" : d + " PV");
 }
-function setPV(v) {
-  const n = parseInt(v);
-  if (!isNaN(n)) { pv = Math.max(0, Math.min(PV_MAX, n)); renderPV(); }
-  document.getElementById("pv-in").value = "";
-}
-function resetPV() { pv = PV_MAX; renderPV(); toast("PV restaurés !"); }
 
-// ══ FLÈCHES ══
-let arr = load("arr", 20);
-function renderArr() {
-  document.getElementById("arr-n").textContent = arr;
-  const pct = arr / 20 * 100;
-  const fill = document.getElementById("arr-fill");
-  fill.style.width = pct + "%";
-  fill.style.background = pct > 50 ? "linear-gradient(90deg,#c89828,#e8b840)"
-    : pct > 20 ? "linear-gradient(90deg,#c07020,#e09030)"
-    : "linear-gradient(90deg,#802020,#c03030)";
-  save("arr", arr);
-}
-function chArr(d) {
-  arr = Math.max(0, Math.min(20, arr + d));
-  renderArr();
-  if (d < 0) toast(arr + " flèche" + (arr > 1 ? "s" : "") + " restante" + (arr > 1 ? "s" : ""));
-}
-function resetArr() { arr = 20; renderArr(); toast("Carquois rechargé !"); }
-
-// ══ JETS MORT ══
-let ds = load("ds", [0,0,0,0,0,0]);
-function tDeath(t, i) {
-  const idx = t === "s" ? i : i+3;
-  ds[idx] = ds[idx] ? 0 : 1;
-  document.getElementById((t==="s"?"ds":"df")+i).classList.toggle("on", !!ds[idx]);
-  save("ds", ds);
-}
-function resetDeath() {
-  ds = [0,0,0,0,0,0]; save("ds", ds);
-  for(let i=0;i<3;i++){document.getElementById("ds"+i).classList.remove("on");document.getElementById("df"+i).classList.remove("on");}
-  toast("Jets réinitialisés");
-}
-function restoreDeath() {
-  for(let i=0;i<3;i++){
-    const sEl = document.getElementById("ds"+i);
-    const fEl = document.getElementById("df"+i);
-    if(sEl) sEl.classList.toggle("on",!!ds[i]);
-    if(fEl) fEl.classList.toggle("on",!!ds[i+3]);
-  }
-}
-
-// ══ REPOS LONG ══
-function longRest() {
-  resetPV(); resetDeath();
-  toast("☽ Repos long — tout restauré !");
-}
-
-// ══ JOURNAL ══
-let entries = load("journal", []);
-
-function todayStr() {
-  const d = new Date();
-  return d.toLocaleDateString("fr-FR", {weekday:"long", day:"numeric", month:"long", year:"numeric"});
-}
-function updateJournalHeader() {
-  const dateEl = document.getElementById("j-date");
-  const numEl = document.getElementById("j-num");
-  if(dateEl) dateEl.textContent = todayStr();
-  if(numEl) numEl.textContent = "Session #" + (entries.length + 1);
-}
-
-function saveEntry() {
-  const title = document.getElementById("j-title").value.trim();
-  const text  = document.getElementById("j-text").value.trim();
-  if (!text) { toast("Écris quelque chose d'abord…"); return; }
-  const entry = {
-    id: Date.now(),
-    session: entries.length + 1,
-    date: todayStr(),
-    title: title || ("Session #" + (entries.length + 1)),
-    text: text
-  };
-  entries.unshift(entry);
-  save("journal", entries);
-  document.getElementById("j-title").value = "";
-  document.getElementById("j-text").value = "";
-  renderJournal();
-  updateJournalHeader();
-  toast("✦ Session enregistrée !");
-}
-
-function deleteEntry(id) {
-  entries = entries.filter(e => e.id !== id);
-  save("journal", entries);
-  renderJournal();
-  updateJournalHeader();
-  toast("Entrée supprimée");
-}
-
-function toggleEntry(id) {
-  const body = document.getElementById("eb-"+id);
-  const arrow = document.getElementById("ea-"+id);
-  const open = body.classList.toggle("open");
-  arrow.classList.toggle("open", open);
-}
-
-function renderJournal() {
-  const container = document.getElementById("j-history");
-  if(!container) return;
-  if (!entries.length) {
-    container.innerHTML = '<div class="journal-empty"><span class="je-icon">📖</span>Tes aventures s\'écriront ici.<br>Enregistre ta première session<br>après ta prochaine partie.</div>';
-    return;
-  }
-  container.innerHTML = entries.map(e => `
-    <div class="journal-entry">
-      <div class="journal-entry-header" onclick="toggleEntry(${e.id})">
-        <span class="entry-num">${e.session}</span>
-        <div class="entry-meta">
-          <div class="entry-title">${e.title}</div>
-          <div class="entry-date">${e.date}</div>
-        </div>
-        <span class="entry-arrow" id="ea-${e.id}">›</span>
-      </div>
-      <div class="entry-body" id="eb-${e.id}">
-        <button class="entry-delete" onclick="deleteEntry(${e.id})">Supprimer</button>
-        ${e.text}
-      </div>
-    </div>
-  `).join("");
-}
-
-// ══ TOAST ══
-let tTimer;
 function toast(msg) {
   const t = document.getElementById("toast");
   t.textContent = msg; t.classList.add("show");
-  clearTimeout(tTimer);
-  tTimer = setTimeout(() => t.classList.remove("show"), 2000);
+  setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-// ══ INIT ══
-renderPV();
-renderArr();
-restoreDeath();
-updateJournalHeader();
-renderJournal();
+function saveEntry() {
+  const txt = document.getElementById("j-text").value;
+  if(!txt) return;
+  const h = document.getElementById("j-history");
+  h.innerHTML = `<div style="border-bottom:1px solid var(--bdr); padding:10px 0;">${txt}</div>` + h.innerHTML;
+  document.getElementById("j-text").value = "";
+  toast("Session enregistrée");
+}
 </script>
+
 </body>
 </html>

@@ -106,14 +106,18 @@ body {
 .portrait {
   position: relative;
   width: 100%;
+  background: #000; /* Fond noir pour combler si l'image est étroite */
+  display: flex;
+  justify-content: center;
   flex-shrink: 0;
 }
+
 .portrait img {
-  width: 100%;
-  height: 52vw;
-  max-height: 300px;
-  object-fit: cover;
-  object-position: center 8%;
+  width: auto;       /* Largeur automatique */
+  max-width: 100%;   /* Ne dépasse pas l'écran */
+  height: 65vw;      /* Hauteur augmentée pour voir plus du perso */
+  max-height: 500px; /* Limite pour ne pas que ça soit trop grand */
+  object-fit: contain; /* FORCE L'IMAGE ENTIÈRE sans couper */
   display: block;
 }
 
